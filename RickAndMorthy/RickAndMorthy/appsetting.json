@@ -1,3 +1,14 @@
 {
-  "rickAndMorthyService": "https://rickandmortyapi.com/api/"
+  "Hello": "World",
+  "rickAndMorthyService": "https://rickandmortyapi.com/api/",
+  "ApplicationBataBase": "RickAndMorthy.db3",
+  "Environment": "Development",
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  }
 }

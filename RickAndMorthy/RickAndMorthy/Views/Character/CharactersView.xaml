@@ -1,12 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RickAndMorthy.Views.Character.CharactersView">
+<ContentPage
+    x:Class="RickAndMorthy.Views.Character.CharactersView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="Characters">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BackgroundColor="{StaticResource Blue}">
+            <CollectionView
+                Margin="15"
+                ItemSizingStrategy="MeasureFirstItem"
+                ItemsSource="{Binding Characters, Mode=TwoWay}"
+                Visual="Material">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="10"
+                        Orientation="Vertical"
+                        Span="2"
+                        VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="20">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={x:Reference Characters}, Path=BindingContext.SelectCharacterCommand, Mode=TwoWay}"
+                                    CommandParameter="{Binding .}"
+                                    NumberOfTapsRequired="2" />
+                            </Frame.GestureRecognizers>
+
+                            <StackLayout Padding="0">
+                                <Image
+                                    HeightRequest="100"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding image}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="100">
+                                    <Image.Clip>
+                                        <EllipseGeometry
+                                            Center="50,50"
+                                            RadiusX="50"
+                                            RadiusY="50" />
+                                    </Image.Clip>
+                                </Image>
+                                <Label Text="{Binding name}" TextColor="{StaticResource Black}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</ContentPage>      

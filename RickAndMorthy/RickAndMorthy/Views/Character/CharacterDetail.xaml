@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="RickAndMorthy.Views.Character.CharacterDetail"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundImageSource="ic_background.jpg">
+    <ContentPage.Content>
+
+        <StackLayout
+            BackgroundColor="Transparent"
+            Margin="15"
+            HorizontalOptions="CenterAndExpand"
+            Spacing="-1"
+            VerticalOptions="CenterAndExpand">
+            <Image
+                Margin="0,0,-20,0"
+                BackgroundColor="Transparent"
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                Source="{Binding Character.image}"
+                VerticalOptions="Center"
+                WidthRequest="100">
+                <Image.Clip>
+                    <EllipseGeometry
+                        Center="50,50"
+                        RadiusX="50"
+                        RadiusY="50" />
+                </Image.Clip>
+            </Image>
+            <Frame
+                BackgroundColor="#f8f8f8"
+                CornerRadius="20"
+                HasShadow="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Grid.Row="0">
+                        <Label TextColor="Black" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Name: </Span>
+                                    <Span Text="{Binding Character.name, Mode=TwoWay}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1">
+                        <Label TextColor="Black" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Status:</Span>
+                                    <Span Text="{Binding Character.status, Mode=TwoWay}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="2">
+                        <Label TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Gender:</Span>
+                                    <Span Text="{Binding Character.gender, Mode=TwoWay}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+
+                </Grid>
+            </Frame>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>
