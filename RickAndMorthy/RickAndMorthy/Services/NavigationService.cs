@@ -12,11 +12,11 @@ namespace RickAndMorthy.Services
         /// <returns></returns>
         public async Task PushAsync(Page page)
         {
-            if (App.Current.MainPage is NavigationPage nav)
-                await nav.PushAsync(page, animated: true);
+            if (App.Current.MainPage is FlyoutPage flyout && flyout.Flyout is not NavigationPage)
+                await flyout.Navigation.PushAsync(page, animated: true);
 
-            if (App.Current.MainPage is MasterDetailPage master)
-                await master.Navigation.PushAsync(page, animated: true);
+            if (App.Current.MainPage is FlyoutPage flyout1 && flyout1.Flyout is NavigationPage nav)
+                await nav.PushAsync(page, animated: true);
         }
 
         /// <summary>
@@ -25,11 +25,11 @@ namespace RickAndMorthy.Services
         /// <returns></returns>
         public async Task PopAsync()
         {
-            if (App.Current.MainPage is NavigationPage nav)
-                await nav.PopAsync();
+            if (App.Current.MainPage is FlyoutPage flyout && flyout.Flyout is not NavigationPage)
+                await flyout.Navigation.PopAsync();
 
-            if (App.Current.MainPage is MasterDetailPage master)
-                await master.Navigation.PopAsync();
+            if (App.Current.MainPage is FlyoutPage flyout1 && flyout1.Flyout is NavigationPage nav)
+                await nav.PopAsync();
         }
     }
 }

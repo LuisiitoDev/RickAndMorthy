@@ -3,10 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RickAndMorthy.Views.Submenu.FavoritesView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <CollectionView Visual="Material" ItemsSource="{Binding Favorites, Mode=TwoWay}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                        HorizontalItemSpacing="10"
+                        Orientation="Vertical"
+                        Span="2"
+                        VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="20">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Command="{Binding Source={x:Reference Characters}, Path=BindingContext.DeleteFavoriteCommand, Mode=TwoWay}"
+                                    CommandParameter="{Binding .}"
+                                    NumberOfTapsRequired="2" />
+                        </Frame.GestureRecognizers>
+
+                        <StackLayout Padding="0">
+                            <Image
+                                    HeightRequest="100"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding Image}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="100">
+                                <Image.Clip>
+                                    <EllipseGeometry
+                                            Center="50,50"
+                                            RadiusX="50"
+                                            RadiusY="50" />
+                                </Image.Clip>
+                            </Image>
+                            <Label Text="{Binding Name}" TextColor="{StaticResource Black}" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </ContentPage.Content>
 </ContentPage>

@@ -1,10 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using RickAndMorthy.Services;
-using RickAndMorthy.ViewModel.CharacterViewModel;
+﻿using Microsoft.Extensions.DependencyInjection;
 using RickAndMorthy.Views.Character;
+using RickAndMorthy.Views.Submenu;
 using System;
-using System.Reflection;
 using Xamarin.Forms;
 
 namespace RickAndMorthy
@@ -15,8 +12,14 @@ namespace RickAndMorthy
         public App()
         {
             InitializeComponent();
-            var navigationPage = new NavigationPage(ServiceProvider.GetService<CharactersView>());
-            MainPage = navigationPage;
+            var detailPage = ServiceProvider.GetService<CharactersView>();
+            var masterPage = ServiceProvider.GetService<SideBarView>();
+
+            MainPage = new FlyoutPage()
+            {
+                Detail = new NavigationPage(detailPage) { BarBackgroundColor = Color.FromHex("#193048") },
+                Flyout = masterPage
+            };
         }
 
         protected override void OnStart()

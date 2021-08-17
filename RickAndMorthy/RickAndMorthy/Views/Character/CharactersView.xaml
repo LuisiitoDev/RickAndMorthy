@@ -3,6 +3,8 @@
     x:Class="RickAndMorthy.Views.Character.CharactersView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Rick and Morthy Characters"
+    NavigationPage.HasNavigationBar="True"
     x:Name="Characters">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{StaticResource Blue}">

@@ -37,7 +37,7 @@ namespace RickAndMorthy.ViewModel.Submenu
         void LoadOptionsOfMenu()
         {
             this.Menu = new ObservableCollection<Menu>();
-            this.Menu.Add(new Menu() { Icon = "", Page = App.ServiceProvider.GetService<CharactersView>() });
+            this.Menu.Add(new Menu() { Icon = "", Name = "Favorites", Page = App.ServiceProvider.GetService<CharactersView>() });
         }
 
         /// <summary>
@@ -55,6 +55,6 @@ namespace RickAndMorthy.ViewModel.Submenu
             {
                 this.logging.Log(this, Microsoft.AppCenter.LogLevel.Error, ex);
             }
-        }    
+        }
     }
 }
