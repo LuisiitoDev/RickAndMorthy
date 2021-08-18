@@ -6,6 +6,7 @@ using RickAndMorthy.Services;
 using RickAndMorthy.Utils;
 using RickAndMorthy.ViewModel.CharacterViewModel;
 using RickAndMorthy.ViewModel.Submenu;
+using RickAndMorthy.Views.Application;
 using RickAndMorthy.Views.Character;
 using RickAndMorthy.Views.Submenu;
 using System;
@@ -62,6 +63,7 @@ namespace RickAndMorthy
             services.AddScoped<CharacterDetailViewModel>();
             services.AddScoped<CharacterDetail>();
             services.AddScoped<FavoriteRepository>();
+            services.AddScoped<TabApplicationView>();
             services.AddSingleton<App>();
             services.AddHttpClient<RickAndMortyService>()
                     .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(ctx.Configuration["rickAndMorthyService"]));

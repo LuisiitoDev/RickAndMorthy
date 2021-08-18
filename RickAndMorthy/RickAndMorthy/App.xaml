@@ -7,9 +7,18 @@
         Define global resources and styles here, that apply to all pages in your app.
     -->
     <Application.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="NunitoRegular" />
+        </Style>
+
         <ResourceDictionary>
             <Color x:Key="Blue">#193048</Color>
             <Color x:Key="Black">#404040</Color>
+            <Color x:Key="colorYellowFEC">#FEC107</Color>
+            <Color x:Key="colorYellowFDD">#fdd835</Color>
+            <Color x:Key="colorWhite">#FFFFFF</Color>
+            <Color x:Key="colorBlack">#000000</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -2,55 +2,120 @@
 <ContentPage
     x:Class="RickAndMorthy.Views.Character.CharactersView"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:CardView="clr-namespace:PanCardView;assembly=PanCardView"
+    xmlns:Proc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+    xmlns:fonticons="clr-namespace:RickAndMorthy.Utils"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Rick and Morthy Characters"
-    NavigationPage.HasNavigationBar="True"
-    x:Name="Characters">
+    x:Name="Characters"
+    IconImageSource="ic_rick.png"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{StaticResource Blue}">
-            <CollectionView
-                Margin="15"
-                ItemSizingStrategy="MeasureFirstItem"
-                ItemsSource="{Binding Characters, Mode=TwoWay}"
-                Visual="Material">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        HorizontalItemSpacing="10"
-                        Orientation="Vertical"
-                        Span="2"
-                        VerticalItemSpacing="10" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
+        <Grid BackgroundColor="{StaticResource Blue}">
+
+            <Image
+                Aspect="Fill"
+                Source="ic_background.jpg" />
+            <BoxView>
+                <BoxView.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Offset="1" Color="Transparent" />
+                        <GradientStop Offset="1" Color="Transparent" />
+                        <GradientStop Offset="0.65" Color="Black" />
+                        <GradientStop Offset="0.65" Color="Black" />
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+
+            <CardView:CoverFlowView ItemsSource="{Binding Characters}" 
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    SelectedItem="{Binding CharacterSelected}"
+                                    ItemSwipedCommand="{Binding ItemSwipedCommand}"
+                                    PositionShiftPercentage="90">
+                
+                <x:Arguments>
+                    <Proc:CoverFlowProcessor ScaleFactor="0.75" />
+                </x:Arguments>
+
+                <CardView:CoverFlowView.ItemTemplate>
                     <DataTemplate>
-                        <Frame CornerRadius="20">
 
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding Source={x:Reference Characters}, Path=BindingContext.SelectCharacterCommand, Mode=TwoWay}"
-                                    CommandParameter="{Binding .}"
-                                    NumberOfTapsRequired="2" />
-                            </Frame.GestureRecognizers>
-
-                            <StackLayout Padding="0">
+                        <Grid Margin="15" RowDefinitions="auto, auto">
+                            <Frame
+                                Grid.Row="0"
+                                Padding="0"
+                                CornerRadius="18"
+                                HasShadow="False"
+                                IsClippedToBounds="True">
                                 <Image
-                                    HeightRequest="100"
-                                    HorizontalOptions="Center"
-                                    Source="{Binding image}"
-                                    VerticalOptions="Center"
-                                    WidthRequest="100">
-                                    <Image.Clip>
-                                        <EllipseGeometry
-                                            Center="50,50"
-                                            RadiusX="50"
-                                            RadiusY="50" />
-                                    </Image.Clip>
-                                </Image>
-                                <Label Text="{Binding name}" TextColor="{StaticResource Black}" />
+                                        Aspect="Fill"
+                                        HeightRequest="300"
+                                        Source="{Binding image}" />
+                            </Frame>
+
+                            <StackLayout
+                                    Grid.Row="1"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Orientation="Vertical">
+                                
+                                <Label
+                                        FontFamily="MaterialIcons"
+                                        FontSize="30"
+                                        HorizontalOptions="Start"
+                                        TextColor="{StaticResource colorWhite}"
+                                        VerticalOptions="Center">
+                                    
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span>Name:</Span>
+                                            <Span Text="{Binding name}"/>
+                                        </FormattedString>    
+                                    </Label.FormattedText>
+                                    
+                                </Label>
+
+                                <Label
+                                        FontFamily="MaterialIcons"
+                                        FontSize="28"
+                                        HorizontalOptions="Start"
+                                        TextColor="{StaticResource colorWhite}"
+                                        VerticalOptions="Center">
+
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span>Specie:</Span>
+                                            <Span Text="{Binding species}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                    
+                                </Label>
+
+                                <Label
+                                        FontFamily="MaterialIcons"
+                                        FontSize="28"
+                                        HorizontalOptions="Start"
+                                        TextColor="{StaticResource colorWhite}"
+                                        VerticalOptions="Center">
+
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span>Gender:</Span>
+                                            <Span Text="{Binding gender}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+
+                                </Label>
+                                
                             </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
+
+                        </Grid>
+                        
+                    </DataTemplate>    
+                </CardView:CoverFlowView.ItemTemplate>
+                
+                
+            </CardView:CoverFlowView>
+            
+        </Grid>
     </ContentPage.Content>
 </ContentPage>      

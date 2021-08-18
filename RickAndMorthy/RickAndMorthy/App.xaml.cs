@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RickAndMorthy.Views.Application;
 using RickAndMorthy.Views.Character;
 using RickAndMorthy.Views.Submenu;
 using System;
@@ -12,14 +13,8 @@ namespace RickAndMorthy
         public App()
         {
             InitializeComponent();
-            var detailPage = ServiceProvider.GetService<CharactersView>();
-            var masterPage = ServiceProvider.GetService<SideBarView>();
-
-            MainPage = new FlyoutPage()
-            {
-                Detail = new NavigationPage(detailPage) { BarBackgroundColor = Color.FromHex("#193048") },
-                Flyout = masterPage
-            };
+            var tabbedPage = ServiceProvider.GetService<TabApplicationView>();
+            MainPage = tabbedPage;
         }
 
         protected override void OnStart()

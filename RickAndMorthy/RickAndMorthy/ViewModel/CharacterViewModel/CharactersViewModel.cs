@@ -66,5 +66,6 @@ namespace RickAndMorthy.ViewModel.CharacterViewModel
             await App.ServiceProvider.GetService<CharacterDetailViewModel>().InitCharacterInformaction(character);
             await navigationService.PushAsync(App.ServiceProvider.GetService<CharacterDetail>());
         }
+
     }
 }
