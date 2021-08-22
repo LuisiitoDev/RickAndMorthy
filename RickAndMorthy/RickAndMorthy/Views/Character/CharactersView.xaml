@@ -2,13 +2,20 @@
 <ContentPage
     x:Class="RickAndMorthy.Views.Character.CharactersView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:CardView="clr-namespace:PanCardView;assembly=PanCardView"
-    xmlns:Proc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
-    xmlns:fonticons="clr-namespace:RickAndMorthy.Utils"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Converters="clr-namespace:RickAndMorthy.Cnverters"
     x:Name="Characters"
     IconImageSource="ic_rick.png"
     NavigationPage.HasNavigationBar="False">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converters:StatusColorConverter x:Key="StatusColor"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    
     <ContentPage.Content>
         <Grid BackgroundColor="{StaticResource Blue}">
 
@@ -26,96 +33,69 @@
                 </BoxView.Background>
             </BoxView>
 
-            <CardView:CoverFlowView ItemsSource="{Binding Characters}" 
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="FillAndExpand"
-                                    SelectedItem="{Binding CharacterSelected}"
-                                    ItemSwipedCommand="{Binding ItemSwipedCommand}"
-                                    PositionShiftPercentage="90">
-                
-                <x:Arguments>
-                    <Proc:CoverFlowProcessor ScaleFactor="0.75" />
-                </x:Arguments>
+            <StackLayout>
+                <Frame Padding="0">
 
-                <CardView:CoverFlowView.ItemTemplate>
-                    <DataTemplate>
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Offset="1" Color="White" />
+                            <GradientStop Offset="1" Color="White" />
+                            <GradientStop Offset="0.65" Color="White" />
+                            <GradientStop Offset="0.65" Color="White" />
+                            <GradientStop Offset="0.65" Color="White" />
+                            <GradientStop Offset="0.65" Color="Transparent" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                    
+                    <SearchBar Placeholder="Search...">
 
-                        <Grid Margin="15" RowDefinitions="auto, auto">
-                            <Frame
-                                Grid.Row="0"
-                                Padding="0"
-                                CornerRadius="18"
-                                HasShadow="False"
-                                IsClippedToBounds="True">
-                                <Image
-                                        Aspect="Fill"
-                                        HeightRequest="300"
-                                        Source="{Binding image}" />
-                            </Frame>
-
-                            <StackLayout
-                                    Grid.Row="1"
-                                    HorizontalOptions="CenterAndExpand"
-                                    Orientation="Vertical">
-                                
-                                <Label
-                                        FontFamily="MaterialIcons"
-                                        FontSize="30"
-                                        HorizontalOptions="Start"
-                                        TextColor="{StaticResource colorWhite}"
-                                        VerticalOptions="Center">
-                                    
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span>Name:</Span>
-                                            <Span Text="{Binding name}"/>
-                                        </FormattedString>    
-                                    </Label.FormattedText>
-                                    
-                                </Label>
-
-                                <Label
-                                        FontFamily="MaterialIcons"
-                                        FontSize="28"
-                                        HorizontalOptions="Start"
-                                        TextColor="{StaticResource colorWhite}"
-                                        VerticalOptions="Center">
-
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span>Specie:</Span>
-                                            <Span Text="{Binding species}"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                    
-                                </Label>
-
-                                <Label
-                                        FontFamily="MaterialIcons"
-                                        FontSize="28"
-                                        HorizontalOptions="Start"
-                                        TextColor="{StaticResource colorWhite}"
-                                        VerticalOptions="Center">
-
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span>Gender:</Span>
-                                            <Span Text="{Binding gender}"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-
-                                </Label>
-                                
-                            </StackLayout>
-
-                        </Grid>
+                        <SearchBar.Background>
+                            <LinearGradientBrush EndPoint="0,5">
+                                <GradientStop Offset="1" Color="Transparent" />
+                                <GradientStop Offset="1" Color="Transparent" />
+                                <GradientStop Offset="0.65" Color="Black" />
+                                <GradientStop Offset="0.65" Color="Black" />
+                            </LinearGradientBrush>
+                        </SearchBar.Background>
                         
-                    </DataTemplate>    
-                </CardView:CoverFlowView.ItemTemplate>
-                
-                
-            </CardView:CoverFlowView>
+                    </SearchBar>
+                </Frame>
+            </StackLayout>
             
+
+            <CollectionView Margin="0,60,0,0" ItemsSource="{Binding Characters}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="20">
+                            <Frame.Background>
+                                <LinearGradientBrush EndPoint="0,5">
+                                    <GradientStop Offset="1" Color="Transparent" />
+                                    <GradientStop Offset="1" Color="Transparent" />
+                                    <GradientStop Offset="0.65" Color="Transparent" />
+                                    <GradientStop Offset="0.65" Color="Transparent" />
+                                    <GradientStop Offset="0.65" Color="Black" />
+                                    <GradientStop Offset="0.65" Color="Transparent" />
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <StackLayout Orientation="Horizontal" Padding="0">
+                                <Image Source="{Binding image}">
+                                    <Image.Clip>
+                                        <EllipseGeometry
+                                            Center="50,50"
+                                            RadiusX="50"
+                                            RadiusY="50" />
+                                    </Image.Clip>
+                                </Image>
+                                <StackLayout>
+                                    <Label FontFamily="Cascadia" FontAttributes="Bold" Text="{Binding name}"/>
+                                    <Label FontFamily="Cascadia" TextColor="{Binding status,Converter={StaticResource StatusColor}}" Text="{Binding status}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>      

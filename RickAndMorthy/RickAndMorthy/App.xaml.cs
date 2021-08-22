@@ -5,6 +5,9 @@ using RickAndMorthy.Views.Submenu;
 using System;
 using Xamarin.Forms;
 
+
+[assembly: ExportFont("CascadiaCode.ttf",Alias = "Cascadia")]
+
 namespace RickAndMorthy
 {
     public partial class App : Application

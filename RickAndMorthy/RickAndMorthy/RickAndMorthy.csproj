@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <None Remove="appsetting.json" />
+    <None Remove="Fonts\CascadiaCode.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="appsetting.json" />
+    <EmbeddedResource Include="Fonts\CascadiaCode.ttf" />
   </ItemGroup>
 
   <ItemGroup>
